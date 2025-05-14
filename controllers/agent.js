@@ -1,13 +1,9 @@
 const Agent = require('../models/Agent');
 
-// @desc    Create a new agent
-// @route   POST /api/agents
-// @access  Private (Admin only)
 exports.createAgent = async (req, res) => {
   try {
     const { name, email, mobile, password } = req.body;
 
-    // Check if required fields are provided
     if (!name || !email || !mobile || !password) {
       return res.status(400).json({
         success: false,
@@ -15,7 +11,7 @@ exports.createAgent = async (req, res) => {
       });
     }
 
-    // Check if agent with email already exists
+    
     const existingAgent = await Agent.findOne({ email });
     if (existingAgent) {
       return res.status(400).json({
@@ -24,7 +20,7 @@ exports.createAgent = async (req, res) => {
       });
     }
 
-    // Create new agent
+    
     const agent = await Agent.create({
       name,
       email,
@@ -32,7 +28,7 @@ exports.createAgent = async (req, res) => {
       password
     });
 
-    // Return agent data (without password)
+    
     res.status(201).json({
       success: true,
       agent: {
@@ -51,12 +47,10 @@ exports.createAgent = async (req, res) => {
   }
 };
 
-// @desc    Get all agents
-// @route   GET /api/agents
-// @access  Private (Admin only)
+
 exports.getAgents = async (req, res) => {
   try {
-    // Get all agents (exclude password field)
+    
     const agents = await Agent.find().select('-password');
 
     res.status(200).json({
@@ -73,9 +67,7 @@ exports.getAgents = async (req, res) => {
   }
 };
 
-// @desc    Get agent by ID
-// @route   GET /api/agents/:id
-// @access  Private (Admin only)
+
 exports.getAgentById = async (req, res) => {
   try {
     const agent = await Agent.findById(req.params.id).select('-password');
@@ -100,9 +92,7 @@ exports.getAgentById = async (req, res) => {
   }
 };
 
-// @desc    Update agent
-// @route   PUT /api/agents/:id
-// @access  Private (Admin only)
+
 exports.updateAgent = async (req, res) => {
   try {
     const { name, email, mobile } = req.body;
@@ -117,7 +107,7 @@ exports.updateAgent = async (req, res) => {
       });
     }
 
-    // Update agent
+    
     agent = await Agent.findByIdAndUpdate(
       req.params.id,
       { name, email, mobile },
@@ -137,9 +127,7 @@ exports.updateAgent = async (req, res) => {
   }
 };
 
-// @desc    Delete agent
-// @route   DELETE /api/agents/:id
-// @access  Private (Admin only)
+
 exports.deleteAgent = async (req, res) => {
   try {
     const agent = await Agent.findById(req.params.id);

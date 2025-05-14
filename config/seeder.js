@@ -4,7 +4,6 @@ const User = require('../models/User');
 
 dotenv.config();
 
-// Connect to database
 mongoose.connect(process.env.MONGODB_URL)
   .then(() => console.log('MongoDB Connected'))
   .catch(err => {
@@ -12,17 +11,15 @@ mongoose.connect(process.env.MONGODB_URL)
     process.exit(1);
   });
 
-// Admin user data
 const adminUser = {
   email: 'admin@example.com',
   password: 'password123',
   role: 'admin'
 };
 
-// Seed admin user
 const seedAdminUser = async () => {
   try {
-    // Clear existing admin users
+    
     await User.deleteMany({ role: 'admin' });
     
     // Create new admin user

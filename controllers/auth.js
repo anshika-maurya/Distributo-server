@@ -4,13 +4,11 @@ const User = require('../models/User');
 // Generate JWT Token
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: '30d' // Token expires in 30 days
+    expiresIn: '30d' 
   });
 };
 
-// @desc    Register new user
-// @route   POST /api/auth/register
-// @access  Public
+
 exports.register = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -53,9 +51,7 @@ exports.register = async (req, res) => {
   }
 };
 
-// @desc    Login user & get token
-// @route   POST /api/auth/login
-// @access  Public
+
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -75,7 +71,7 @@ exports.login = async (req, res) => {
     if (!user || !(await user.comparePassword(password))) {
       return res.status(401).json({
         success: false,
-        message: 'Invalid credentials'
+        message: 'Please Sign Up first!'
       });
     }
 
@@ -101,9 +97,7 @@ exports.login = async (req, res) => {
   }
 };
 
-// @desc    Get current user profile
-// @route   GET /api/auth/me
-// @access  Private
+
 exports.getMe = async (req, res) => {
   try {
     // User is already available in req.user from auth middleware

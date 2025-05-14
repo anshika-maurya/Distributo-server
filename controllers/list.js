@@ -16,9 +16,7 @@ const processExcelFile = (filePath) => {
   return xlsx.utils.sheet_to_json(sheet);
 };
 
-// @desc    Upload and distribute list
-// @route   POST /api/lists/upload
-// @access  Private (Admin only)
+
 exports.uploadAndDistributeList = async (req, res) => {
   try {
     if (!req.file) {
@@ -186,9 +184,7 @@ exports.uploadAndDistributeList = async (req, res) => {
   }
 };
 
-// @desc    Update batch status
-// @route   PUT /api/lists/batch/:batchId/status
-// @access  Private (Admin only)
+
 exports.updateBatchStatus = async (req, res) => {
   try {
     const { batchId } = req.params;
@@ -237,9 +233,7 @@ exports.updateBatchStatus = async (req, res) => {
   }
 };
 
-// @desc    Delete a batch and its list items
-// @route   DELETE /api/lists/batch/:batchId
-// @access  Private (Admin only)
+
 exports.deleteBatch = async (req, res) => {
   try {
     const { batchId } = req.params;
@@ -286,9 +280,7 @@ exports.deleteBatch = async (req, res) => {
   }
 };
 
-// @desc    Get all batches
-// @route   GET /api/lists/batches
-// @access  Private (Admin only)
+
 exports.getBatches = async (req, res) => {
   try {
     // Get filter parameters
@@ -317,9 +309,8 @@ exports.getBatches = async (req, res) => {
   }
 };
 
-// @desc    Get lists by agent
-// @route   GET /api/lists/agent/:agentId
-// @access  Private (Admin only)
+
+
 exports.getListsByAgent = async (req, res) => {
   try {
     const { agentId } = req.params;
@@ -351,9 +342,7 @@ exports.getListsByAgent = async (req, res) => {
   }
 };
 
-// @desc    Get list items by batch
-// @route   GET /api/lists/batch/:batchId
-// @access  Private (Admin only)
+
 exports.getListItemsByBatch = async (req, res) => {
   try {
     const { batchId } = req.params;
